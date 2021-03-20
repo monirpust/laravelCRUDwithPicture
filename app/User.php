@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'image'
+        'name', 'email', 'image', 'contact', 'contactTwo'
     ];
 
     /**
@@ -47,6 +47,17 @@ class User extends Authenticatable
         $path = route('show.user', $this->username);
 
         return $append ? "{$path}/{$append}" : $path;
+    }
+
+    public function contacts()
+    {
+        return $this->hasMany(Phone::class);
+    }
+
+    public function createdUser($user)
+    {
+        $newUser = User::where('email', $user->email);
+        return $newUser;
     }
 
 }

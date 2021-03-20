@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use App\Phone;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class ProfilesController extends Controller
         return view('profiles.create');
     }
 
-    public function store(User $user)
+    public function store(Request $user)
     {
 
         $attributes = request()->validate([
@@ -55,7 +56,19 @@ class ProfilesController extends Controller
 
         $attributes['image'] = request('image')->store('images');
 
-        User::create($attributes);
+        $newUser = User::create($attributes);
+
+
+        Phone::create([
+            'user_id' => $newUser->id,
+            'contact' => $user->contact,
+        ]);
+
+        Phone::create([
+            'user_id' => $newUser->id,
+            'contact' => $user->contactTwo,
+        ]);
+
 
         return redirect()->route('index');
     }
@@ -91,5 +104,7 @@ class ProfilesController extends Controller
         return redirect()->route('show.user');
 
     }
+
+
 
 }

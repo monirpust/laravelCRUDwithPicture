@@ -34,7 +34,33 @@
 
         </div>
 
+        <div class="mb-6">
 
+            <label class="block mb-2 uppercase font-bold text-xs text-grey-700" for="contact">
+            Phone number
+            </label>
+
+            <input class="border border-grey-400 p-2 w-full" type="text" name="contact" id="contact" placeholder="+8801700000000" required>
+
+            @error('contact')
+            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+            @enderror
+
+        </div>
+
+        <div class="mb-6">
+
+            <label class="block mb-2 uppercase font-bold text-xs text-grey-700" for="contactTwo">
+            Alternative phone number
+            </label>
+
+            <input class="border border-grey-400 p-2 w-full" type="text" name="contactTwo" id="contactTwo" placeholder="+8801700000001" >
+
+            @error('contactTwo')
+            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+            @enderror
+
+        </div>
 
         <div class="mb-6">
 
