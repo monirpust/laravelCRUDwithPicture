@@ -1,6 +1,6 @@
 <x-app>
     <div class="mx-8">
-    <form action="{{route('update.user')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('update.user', $user->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method("patch")
 

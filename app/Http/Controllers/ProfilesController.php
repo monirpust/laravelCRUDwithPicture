@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class ProfilesController extends Controller
 {
+    //showing all users
     public function index()
     {
         $users = User::all();
@@ -16,21 +17,27 @@ class ProfilesController extends Controller
         return view('profiles.index', compact('users'));
     }
 
+//view a signle user details
     public function show(User $user)
     {
         return view('profiles.show', compact('user'));
     }
 
-    public function edit(User $user)
+//viewing edit for of a single user
+    public function edit($id)
     {
+        $user = User::findOrFail($id);
+
         return view('profiles.edit', compact('user'));
     }
 
+//showing create form for user profile
     public function create()
     {
         return view('profiles.create');
     }
 
+//persist created user in db
     public function store(Request $user)
     {
 
@@ -50,9 +57,18 @@ class ProfilesController extends Controller
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore($user)]
+                Rule::unique('users')->ignore($user)
+
+
+            ]
 
         ]);
+
+        $validatedContact = request()->validate([
+            'contact' => 'required|regex:/^(01)[3-9][0-9]{8}$/',
+            'contactTwo' => 'nullable|regex:/^(01)[3-9][0-9]{8}$/'
+        ]);
+
 
         $attributes['image'] = request('image')->store('images');
 
@@ -74,6 +90,7 @@ class ProfilesController extends Controller
     }
 
 
+// save edited user in db
     public function update(Request $user)
     {
 
@@ -93,15 +110,16 @@ class ProfilesController extends Controller
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore($user)]
+                Rule::unique('users')->ignore($user)
+            ]
 
         ]);
 
         $attributes['image'] = request('image')->store('images');
 
-        $user->update($attributes);
+        User::updateOrCreate($attributes);
 
-        return redirect()->route('show.user');
+        return redirect()->route('index');
 
     }
 

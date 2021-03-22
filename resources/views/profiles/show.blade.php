@@ -14,10 +14,10 @@
                 @endforeach
 
             </div>
-            {{-- <div class="mx-4">
-                    <a class="rounded-full border border-gray-300 shadow py-2 px-2 text-black mr-4" href="{{$user->path("edit")}}">Edit User</a>
+            <div class="mx-4">
+                    <a class="rounded-full border border-gray-300 shadow py-2 px-2 text-black mr-4" href="{{$user->id}}/edit">Edit User</a>
 
-            </div> --}}
+            </div>
         </div>
 
 </x-app>

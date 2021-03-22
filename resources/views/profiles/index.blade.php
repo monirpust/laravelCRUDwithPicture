@@ -4,7 +4,7 @@
         <h2>List of Users:</h2>
         <ol>
             @foreach ($users as $user)
-                <li class="font-bold text-400"><a href="proflies/{{$user->name}}">{{$user->name}}</a></li>
+                <li class="font-bold text-400"><a href="profiles/{{$user->name}}">{{$user->name}}</a></li>
             @endforeach
         </ol>
 

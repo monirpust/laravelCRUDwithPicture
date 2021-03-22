@@ -17,18 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/profiles', 'ProfilesController@index')->name('index');
 
-Route::get('proflies/{user:name}', 'ProfilesController@show')->name('show.user');
-
-Route::get('profiles/{user:name}/edit', 'ProfilesController@edit')->name('edit.user');
-
 Route::get('profiles/create', 'ProfilesController@create')->name('create.user');
+
+Route::get('profiles/{user:name}', 'ProfilesController@show')->name('show.user');
+
+Route::get('profiles/{id}/edit', 'ProfilesController@edit')->name('edit.user');
 
 Route::post('profiles', 'ProfilesController@store')->name('store.user');
 
-Route::patch('/profiles/{user:username}', 'ProfilesController@update')->name('update.user');
+Route::patch('/profiles/{id}', 'ProfilesController@update')->name('update.user');
